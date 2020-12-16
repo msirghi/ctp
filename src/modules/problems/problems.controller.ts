@@ -26,6 +26,7 @@ import { ProblemDTO } from './dto/Problem.dto';
 import { ProblemsService } from './problems.service';
 import { ProblemDocument } from './schema/problems.schema';
 import SwaggerConstants from '../../constants/swagger.constants';
+import { RequestPayload } from 'src/common/types';
 
 @Controller('countries/:countryId/locations/:locationId/problems')
 @ApiTags('Problems')
@@ -120,5 +121,27 @@ export class ProblemsController {
     @Param('problemId') problemId: string
   ) {
     return this.problemService.incrementViews(countryId, locationId, problemId);
+  }
+
+  @Patch(':problemId/thumbUp')
+  @UseGuards(AuthGuard)
+  async thumpUp(
+    @Param('countryId') countryId: string,
+    @Param('locationId') locationId: string,
+    @Param('problemId') problemId: string,
+    @Request() req: RequestPayload
+  ) {
+    return this.problemService.thumbUp(req.userId, countryId, locationId, problemId);
+  }
+
+  @Patch(':problemId/thumbDown')
+  @UseGuards(AuthGuard)
+  async thumpDown(
+    @Param('countryId') countryId: string,
+    @Param('locationId') locationId: string,
+    @Param('problemId') problemId: string,
+    @Request() req: RequestPayload
+  ) {
+    return this.problemService.thumbDown(req.userId, countryId, locationId, problemId);
   }
 }

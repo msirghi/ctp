@@ -18,8 +18,12 @@ const NOT_FOUND = 'Not found.';
 const LACK_OF_PERMISSIONS = "You don't have enough permissions for this operation.";
 const PREFERENCES_ALREADY_INIT = 'Preferences are already initialized';
 const PREFERENCES_NOT_INIT = 'Preferences not initialized';
+const ALREADY_THUMBED_UP = 'This problem is already thumbed up by you';
+const ALREADY_THUMBED_DOWN = 'This problem is already thumbed down by you';
 
 export default {
+  ALREADY_THUMBED_UP,
+  ALREADY_THUMBED_DOWN,
   PREFERENCES_NOT_INIT,
   PREFERENCES_ALREADY_INIT,
   EXISTING_COUNTRY_ERROR,

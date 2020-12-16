@@ -1,9 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
+import { PROBLEM_AUDIT_ACTION } from 'src/common/enums';
 import ErrorConstants from 'src/constants/error.constants';
 import { CountryService } from '../countries/countries.service';
 import { LocationService } from '../locations/locations.service';
+import { ProblemsAuditService } from '../problemsAudit/problemsAudit.service';
 import { ProblemDTO } from './dto/Problem.dto';
 import { Problem, ProblemDocument } from './schema/problems.schema';
 
@@ -12,7 +14,8 @@ export class ProblemsService {
   constructor(
     @InjectModel(Problem.name) private problemModel: Model<ProblemDocument>,
     private readonly countryService: CountryService,
-    private readonly locationService: LocationService
+    private readonly locationService: LocationService,
+    private readonly problemAuditService: ProblemsAuditService
   ) {}
 
   async createProblem(
@@ -140,5 +143,41 @@ export class ProblemsService {
         throw new HttpException(ErrorConstants.PROBLEM_NOT_FOUND, HttpStatus.NOT_FOUND);
       }
     });
+  }
+
+  async thumbUp(userId: string, countryId: string, locationId: string, problemId: string) {
+    await this.getById(countryId, locationId, problemId);
+    const lastAction = await this.problemAuditService.getLastUserActionByProblemId(problemId, userId);
+
+    if (lastAction && lastAction.action === PROBLEM_AUDIT_ACTION.THUMB_UP) {
+      throw new HttpException(ErrorConstants.ALREADY_THUMBED_UP, HttpStatus.BAD_REQUEST);
+    }
+
+    if (lastAction && lastAction.action === PROBLEM_AUDIT_ACTION.THUMB_DOWN) {
+      await this.problemModel.findOneAndUpdate({ _id: problemId }, { $inc: { thumbsDown: -1, thumbsUp: 1 } });
+      await this.problemAuditService.trackAction(problemId, userId, PROBLEM_AUDIT_ACTION.THUMB_UP);
+      return;
+    }
+
+    await this.problemModel.findOneAndUpdate({ _id: problemId }, { $inc: { thumbsUp: 1 } });
+    await this.problemAuditService.trackAction(problemId, userId, PROBLEM_AUDIT_ACTION.THUMB_UP);
+  }
+
+  async thumbDown(userId: string, countryId: string, locationId: string, problemId: string) {
+    await this.getById(countryId, locationId, problemId);
+    const lastAction = await this.problemAuditService.getLastUserActionByProblemId(problemId, userId);
+
+    if (lastAction && lastAction.action === PROBLEM_AUDIT_ACTION.THUMB_DOWN) {
+      throw new HttpException(ErrorConstants.ALREADY_THUMBED_DOWN, HttpStatus.BAD_REQUEST);
+    }
+
+    if (lastAction && lastAction.action === PROBLEM_AUDIT_ACTION.THUMB_UP) {
+      await this.problemModel.findOneAndUpdate({ _id: problemId }, { $inc: { thumbsUp: -1, thumbsDown: 1 } });
+      await this.problemAuditService.trackAction(problemId, userId, PROBLEM_AUDIT_ACTION.THUMB_DOWN);
+      return;
+    }
+
+    await this.problemModel.findOneAndUpdate({ _id: problemId }, { $inc: { thumbsDown: 1 } });
+    await this.problemAuditService.trackAction(problemId, userId, PROBLEM_AUDIT_ACTION.THUMB_DOWN);
   }
 }

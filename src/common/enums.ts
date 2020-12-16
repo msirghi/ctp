@@ -5,6 +5,11 @@ export enum ROLES {
 }
 
 export enum INTERFACE_TYPE {
-    DARK = 'DARK',
-    LIGHT = 'LIGHT'
+  DARK = 'DARK',
+  LIGHT = 'LIGHT'
+}
+
+export enum PROBLEM_AUDIT_ACTION {
+  THUMB_UP = 'THUMB_UP',
+  THUMB_DOWN = 'THUMB_DOWN'
 }

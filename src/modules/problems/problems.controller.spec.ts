@@ -1,5 +1,4 @@
-import * as request from 'supertest';
-import { ProblemDTO } from 'dist/problems/dto/Problem.dto';
+import { ProblemDTO } from '../problems/dto/Problem.dto';
 import { HttpStatus } from '@nestjs/common';
 import ErrorConstants from '../../constants/error.constants';
 import TestHelper from '../../common/testHelper';
@@ -56,6 +55,70 @@ describe('ProblemsController', () => {
         expect(locationId).toBe(createdLocationId);
         expect(raiting).toBe(0);
       });
+  });
+
+  it('should thumb up the probem', async () => {
+    await TestHelper.requestHelper
+      .patch(
+        `${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}/thumbUp`
+      )
+      .then((response) => {
+        expect(response.status).toBe(HttpStatus.OK);
+      });
+
+    await TestHelper.requestHelper
+      .get(`${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}`)
+      .then((response) => {
+        expect(response.status).toBe(HttpStatus.OK);
+        expect(response.body.thumbsUp).toBe(1);
+        expect(response.body.thumbsDown).toBe(0);
+      });
+  });
+
+  it('should throw an error in thumbing up the probem second time', async () => {
+    await TestHelper.requestHelper
+      .patch(
+        `${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}/thumbUp`
+      )
+      .then(
+        (_) => {},
+        (err) => {
+          expect(err.status).toBe(HttpStatus.BAD_REQUEST);
+          expect(err.response.body.message).toBe(ErrorConstants.ALREADY_THUMBED_UP);
+        }
+      );
+  });
+
+  it('should thumb down the probem', async () => {
+    await TestHelper.requestHelper
+      .patch(
+        `${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}/thumbDown`
+      )
+      .then((response) => {
+        expect(response.status).toBe(HttpStatus.OK);
+      });
+
+    await TestHelper.requestHelper
+      .get(`${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}`)
+      .then((response) => {
+        expect(response.status).toBe(HttpStatus.OK);
+        expect(response.body.thumbsUp).toBe(0);
+        expect(response.body.thumbsDown).toBe(1);
+      });
+  });
+
+  it('should throw an error in thumbing down the probem second time', async () => {
+    await TestHelper.requestHelper
+      .patch(
+        `${baseUrl}/countries/${createdCountryId}/locations/${createdLocationId}/problems/${createdProblemId}/thumbDown`
+      )
+      .then(
+        (_) => {},
+        (err) => {
+          expect(err.status).toBe(HttpStatus.BAD_REQUEST);
+          expect(err.response.body.message).toBe(ErrorConstants.ALREADY_THUMBED_DOWN);
+        }
+      );
   });
 
   it('should throw an error on problem creation if name has two letters', async () => {

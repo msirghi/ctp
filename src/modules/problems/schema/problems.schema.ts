@@ -28,6 +28,12 @@ export class Problem {
 
   @Prop({ required: false })
   creator: string;
+
+  @Prop({ required: true, default: 0 })
+  thumbsUp: number;
+
+  @Prop({ required: true, default: 0 })
+  thumbsDown: number;
 }
 
 export const ProblemSchema = SchemaFactory.createForClass(Problem);

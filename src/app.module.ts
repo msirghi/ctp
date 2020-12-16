@@ -8,6 +8,7 @@ import { ProblemsModule } from './modules/problems/problems.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { PreferenceModule } from './modules/preferences/preference.module';
+import { ProblemsAuditModule } from './modules/problemsAudit/problemsAudit.module';
 require('dotenv').config();
 
 const username = process.env.DB_USERNAME;
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'local') {
     UsersModule,
     AuthModule,
     PreferenceModule,
+    ProblemsAuditModule,
     MongooseModule.forRoot(root)
   ],
   controllers: [AppController],
