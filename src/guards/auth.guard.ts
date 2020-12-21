@@ -14,9 +14,10 @@ export class AuthGuard implements CanActivate {
 
     try {
       const token = authorization.split(' ')[1];
-      const { userId, role } = verify(token, process.env.ACCESS_TOKEN_SECRET!);
+      const { userId, role, usname } = verify(token, process.env.ACCESS_TOKEN_SECRET!);
       request.userId = userId;
       request.role = role;
+      request.usname = usname;
       return true;
     } catch (e) {
       return false;

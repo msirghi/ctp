@@ -20,7 +20,7 @@ const generateToken = (userId: number) => {
 };
 
 const createAccessToken = (user: UserDocument) => {
-  return sign({ userId: user._id, role: user.role }, process.env.ACCESS_TOKEN_SECRET!, {
+  return sign({ userId: user._id, role: user.role, usname: user.username }, process.env.ACCESS_TOKEN_SECRET!, {
     expiresIn: '7d'
   });
 };

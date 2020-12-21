@@ -20,8 +20,12 @@ const PREFERENCES_ALREADY_INIT = 'Preferences are already initialized';
 const PREFERENCES_NOT_INIT = 'Preferences not initialized';
 const ALREADY_THUMBED_UP = 'This problem is already thumbed up by you';
 const ALREADY_THUMBED_DOWN = 'This problem is already thumbed down by you';
+const COMMENT_MESSAGE_TOO_SHORT = 'Comment message is too short';
+const COMMENT_NOT_FOUND = 'Comment not found.';
+const NEWS_NOT_FOUND = 'News not found';
 
 export default {
+  NEWS_NOT_FOUND,
   ALREADY_THUMBED_UP,
   ALREADY_THUMBED_DOWN,
   PREFERENCES_NOT_INIT,
@@ -43,5 +47,7 @@ export default {
   USERNAME_TAKEN,
   BAD_CREDENTIALS,
   NOT_FOUND,
-  LACK_OF_PERMISSIONS
+  LACK_OF_PERMISSIONS,
+  COMMENT_MESSAGE_TOO_SHORT,
+  COMMENT_NOT_FOUND
 };
