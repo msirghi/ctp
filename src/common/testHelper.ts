@@ -1,7 +1,9 @@
 import * as request from 'supertest';
 import Chance = require('chance');
+
 require('dotenv').config();
 const defaults = require('superagent-defaults');
+
 const chance = new Chance();
 const defaultUserEmail = process.env.DEFAULT_USER_EMAIL;
 const defaultUserPassword = process.env.DEFAULT_USER_PASSWORD;

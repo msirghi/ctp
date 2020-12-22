@@ -11,6 +11,7 @@ import { PreferenceModule } from './modules/preferences/preference.module';
 import { ProblemsAuditModule } from './modules/problemsAudit/problemsAudit.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { NewsModule } from './modules/news/news.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 require('dotenv').config();
 
 const username = process.env.DB_USERNAME;
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === 'local') {
     ProblemsAuditModule,
     CommentsModule,
     NewsModule,
+    NotificationsModule,
     MongooseModule.forRoot(root)
   ],
   controllers: [AppController],

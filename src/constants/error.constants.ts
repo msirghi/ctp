@@ -23,8 +23,10 @@ const ALREADY_THUMBED_DOWN = 'This problem is already thumbed down by you';
 const COMMENT_MESSAGE_TOO_SHORT = 'Comment message is too short';
 const COMMENT_NOT_FOUND = 'Comment not found.';
 const NEWS_NOT_FOUND = 'News not found';
+const NOTIFICATION_NOT_FOUND = 'Notification not found';
 
 export default {
+  NOTIFICATION_NOT_FOUND,
   NEWS_NOT_FOUND,
   ALREADY_THUMBED_UP,
   ALREADY_THUMBED_DOWN,
