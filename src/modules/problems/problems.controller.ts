@@ -22,7 +22,7 @@ import {
   ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { ProblemDTO } from './dto/Problem.dto';
+import { ProblemDTO } from './dto/problem.dto';
 import { ProblemsService } from './problems.service';
 import { ProblemDocument } from './schema/problems.schema';
 import SwaggerConstants from '../../constants/swagger.constants';

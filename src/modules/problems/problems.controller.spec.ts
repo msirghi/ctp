@@ -1,4 +1,4 @@
-import { ProblemDTO } from '../problems/dto/Problem.dto';
+import { ProblemDTO } from '../problems/dto/problem.dto';
 import { HttpStatus } from '@nestjs/common';
 import ErrorConstants from '../../constants/error.constants';
 import TestHelper from '../../common/testHelper';

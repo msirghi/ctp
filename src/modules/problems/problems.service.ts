@@ -6,7 +6,7 @@ import ErrorConstants from 'src/constants/error.constants';
 import { CountryService } from '../countries/countries.service';
 import { LocationService } from '../locations/locations.service';
 import { ProblemsAuditService } from '../problemsAudit/problemsAudit.service';
-import { ProblemDTO } from './dto/Problem.dto';
+import { ProblemDTO } from './dto/problem.dto';
 import { Problem, ProblemDocument } from './schema/problems.schema';
 
 @Injectable()
