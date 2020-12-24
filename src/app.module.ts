@@ -12,6 +12,7 @@ import { ProblemsAuditModule } from './modules/problemsAudit/problemsAudit.modul
 import { CommentsModule } from './modules/comments/comments.module';
 import { NewsModule } from './modules/news/news.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
+import { HealthModule } from './modules/health/health.module';
 require('dotenv').config();
 
 const username = process.env.DB_USERNAME;
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === 'local') {
 } else {
   root = `mongodb+srv://${username}:${password}@cluster0.bgcfb.mongodb.net/countries?retryWrites=true&w=majority`;
 }
+
 @Module({
   imports: [
     CountriesModule,
@@ -35,7 +37,8 @@ if (process.env.NODE_ENV === 'local') {
     CommentsModule,
     NewsModule,
     NotificationsModule,
-    MongooseModule.forRoot(root)
+    MongooseModule.forRoot(root),
+    HealthModule
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -25,6 +25,7 @@
     "@nestjs/mongoose": "^7.1.0",
     "@nestjs/platform-express": "^7.5.1",
     "@nestjs/swagger": "^4.7.5",
+    "@nestjs/terminus": "^7.0.1",
     "bcryptjs": "^2.4.3",
     "check-password-strength": "^1.0.15",
     "class-transformer": "^0.3.1",
