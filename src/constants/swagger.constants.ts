@@ -52,8 +52,38 @@ const INTERFACE_LANGUAGE_UPDATE = 'Updates users language';
 const NOT_AUTH = 'Auth token is missing or invalid';
 const FORBIDDEN = 'Lack of permissions for this operation.';
 const INVALID_DATA = 'Invalid data';
+const NOT_FOUND = 'Requested item was not found';
+
+// comments API
+const PROBLEM_COMMENT_ADD = 'Adds comment for a problem';
+const GET_COMMENTS_BY_ITEM = 'Returns all comments by item id'
+const GET_COMMENT_BY_ID = 'Returns comment by id';
+const UPDATE_COMMENT_MESSAGE = 'Updates comment message';
+const REMOVE_COMMENT_BY_ID = 'Removes comment by id';
+
+// news API
+const NEWS_ADD = 'Adds new news';
+const UPDATE_NEWS_BY_ID = 'Updates news by id';
+const GET_NEWS_BY_ID = 'Returns news by id';
+const GET_NEWS_BY_COUNTRY = 'Returns news by country';
+const UPDATE_NEWS_NAME = 'Updates news name';
+const UPDATE_NEWS_DESCRIPTION = 'Updates news description';
+const REMOVE_NEWS_BY_ID = 'Removed news by id';
 
 export default {
+  REMOVE_NEWS_BY_ID,
+  UPDATE_NEWS_DESCRIPTION,
+  UPDATE_NEWS_NAME,
+  NEWS_ADD,
+  GET_NEWS_BY_COUNTRY,
+  UPDATE_NEWS_BY_ID,
+  GET_NEWS_BY_ID,
+  REMOVE_COMMENT_BY_ID,
+  NOT_FOUND,
+  GET_COMMENT_BY_ID,
+  UPDATE_COMMENT_MESSAGE,
+  GET_COMMENTS_BY_ITEM,
+  PROBLEM_COMMENT_ADD,
   INTERFACE_UPDATE,
   INTERFACE_LANGUAGE_UPDATE,
   PREFERENCE_INIT,
