@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { ROLES } from 'src/common/enums';
-import ErrorConstants from 'src/constants/error.constants';
-import { LocationService } from '../locations/locations.service';
-import { CommentCreationDTO } from './dto/commentCreation';
-import { Comment, CommentDocument } from './schema/comments.schema';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { ROLES } from "src/common/enums";
+import ErrorConstants from "src/constants/error.constants";
+import { LocationService } from "../locations/locations.service";
+import { CommentCreationDTO } from "./dto/commentCreation";
+import { Comment, CommentDocument } from "./schema/comments.schema";
 
 @Injectable()
 export class CommentsService {
